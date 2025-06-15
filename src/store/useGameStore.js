@@ -10,11 +10,27 @@ export const PHASES = {
 const MIN_BID = 500
 const INITIAL_SCORE = 5000
 
+const getToday = () => new Date().toISOString().slice(0, 10)
+const EARN_LIMIT = 5000
+const EARN_AMOUNT = 500
+
 const getInitialUsername = () => {
   try {
     return localStorage.getItem('username') || ''
   } catch {
     return ''
+  }
+}
+
+const getInitialEarn = () => {
+  try {
+    const data = JSON.parse(localStorage.getItem('earnPoints') || '{}')
+    return {
+      dailyEarnedPoints: data.date === getToday() ? data.points : 0,
+      lastEarnDate: data.date === getToday() ? data.date : getToday(),
+    }
+  } catch {
+    return { dailyEarnedPoints: 0, lastEarnDate: getToday() }
   }
 }
 
@@ -31,6 +47,7 @@ const useGameStore = create((set, get) => ({
   score: INITIAL_SCORE,
   username: getInitialUsername(),
   leaderboard: [],
+  ...getInitialEarn(),
 
   // Actions
   setUsername: async (username) => {
@@ -160,6 +177,33 @@ const useGameStore = create((set, get) => ({
         return Math.max(0, Math.ceil((15000 - (now - phaseStartTime)) / 1000))
       default:
         return 0
+    }
+  },
+
+  earnPoints: async () => {
+    const { dailyEarnedPoints, score, username } = get()
+    if (dailyEarnedPoints >= EARN_LIMIT) return
+    const newEarned = dailyEarnedPoints + EARN_AMOUNT > EARN_LIMIT ? EARN_LIMIT : dailyEarnedPoints + EARN_AMOUNT
+    const newScore = score + EARN_AMOUNT
+    set({ dailyEarnedPoints: newEarned, score: newScore, lastEarnDate: getToday() })
+    localStorage.setItem('earnPoints', JSON.stringify({ date: getToday(), points: newEarned }))
+    if (username) {
+      await supabase.from('leaderboard').upsert([{ username, score: newScore }], { onConflict: ['username'] })
+      await get().fetchGlobalLeaderboard()
+    }
+  },
+
+  canEarnPoints: () => {
+    const { dailyEarnedPoints } = get()
+    return dailyEarnedPoints < EARN_LIMIT
+  },
+
+  resetEarnIfNeeded: () => {
+    const today = getToday()
+    const { lastEarnDate } = get()
+    if (lastEarnDate !== today) {
+      set({ dailyEarnedPoints: 0, lastEarnDate: today })
+      localStorage.setItem('earnPoints', JSON.stringify({ date: today, points: 0 }))
     }
   }
 }))

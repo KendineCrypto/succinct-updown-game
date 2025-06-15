@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useGameStore from '../store/useGameStore'
 
 export default function LeaderboardModal({ open, onClose }) {
   const leaderboard = useGameStore(s => s.getLeaderboard())
+  const fetchGlobalLeaderboard = useGameStore(s => s.fetchGlobalLeaderboard)
   const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    if (open) fetchGlobalLeaderboard()
+  }, [open, fetchGlobalLeaderboard])
 
   if (!open) return null
 

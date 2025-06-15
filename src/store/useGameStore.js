@@ -36,15 +36,33 @@ const useGameStore = create((set, get) => ({
   setUsername: async (username) => {
     set({ username })
     localStorage.setItem('username', username)
-    // Check if user exists in Supabase, if not, insert
+    // Fetch user from Supabase
     const { data, error } = await supabase
       .from('leaderboard')
-      .select('username')
+      .select('score')
       .eq('username', username)
-    if (!data || data.length === 0) {
+      .single()
+    if (data && data.score !== undefined) {
+      set({ score: data.score })
+    } else {
+      // Insert new user
       await supabase.from('leaderboard').insert([{ username, score: INITIAL_SCORE }])
+      set({ score: INITIAL_SCORE })
     }
     get().fetchGlobalLeaderboard()
+  },
+
+  loadUserScore: async () => {
+    const username = get().username
+    if (!username) return
+    const { data, error } = await supabase
+      .from('leaderboard')
+      .select('score')
+      .eq('username', username)
+      .single()
+    if (data && data.score !== undefined) {
+      set({ score: data.score })
+    }
   },
 
   setScore: async (score) => {

@@ -70,7 +70,7 @@ const useGameStore = create((set, get) => ({
     const { username } = get()
     if (username) {
       await supabase.from('leaderboard').upsert([{ username, score }], { onConflict: ['username'] })
-      get().fetchGlobalLeaderboard()
+      await get().fetchGlobalLeaderboard()
     }
   },
 
@@ -125,7 +125,7 @@ const useGameStore = create((set, get) => ({
     }))
   },
 
-  startResultPhase: () => {
+  startResultPhase: async () => {
     const { bidDirection, lockedPrice, lastPrice, bidAmount, score, setScore } = get()
     let isWin = false
     if (bidDirection === 'up') {
@@ -142,7 +142,7 @@ const useGameStore = create((set, get) => ({
       phaseStartTime: Date.now(),
       result: isWin ? 'WIN' : 'LOSE',
     })
-    setScore(newScore)
+    await setScore(newScore)
     setTimeout(() => {
       get().startNewRound()
     }, 15000)

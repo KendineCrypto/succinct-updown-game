@@ -1,0 +1,254 @@
+/* Eski bilgisayar sistemi stili */
+body {
+  font-family: 'Courier New', monospace;
+  background-color: #e6f3ff;
+}
+
+/* Window borders */
+.window-border {
+  border: 2px solid #666;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Title bar */
+.title-bar {
+  background: linear-gradient(to right, #c0c0c0, #e0e0e0);
+  border-bottom: 2px solid #666;
+  padding: 4px 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Retro button styles - Eski bilgisayar tarzı */
+.retro-btn {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+  border: 2px outset #666;
+  padding: 6px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.1s ease;
+}
+
+.retro-btn:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+.retro-btn:active {
+  border-style: inset;
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
+  transform: translateY(1px);
+}
+
+/* Retro button - Flat style */
+.retro-btn-flat {
+  background: #f0f0f0;
+  border: 1px solid #666;
+  padding: 4px 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  color: #333;
+  font-weight: normal;
+}
+
+.retro-btn-flat:hover {
+  background: #e0e0e0;
+}
+
+.retro-btn-flat:active {
+  background: #d0d0d0;
+  border-style: inset;
+}
+
+/* Retro button - Tab style */
+.retro-btn-tab {
+  background: #d0d0d0;
+  border: 1px solid #666;
+  border-bottom: none;
+  padding: 4px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  color: #333;
+  font-weight: normal;
+}
+
+.retro-btn-tab.active {
+  background: #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.retro-btn-tab:hover {
+  background: #e0e0e0;
+}
+
+/* Retro button - Small square */
+.retro-btn-square {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+  border: 2px outset #666;
+  width: 24px;
+  height: 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retro-btn-square:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+.retro-btn-square:active {
+  border-style: inset;
+  background: linear-gradient(to bottom, #c0d0c0, #a0a0a0);
+}
+
+/* Retro button - Large */
+.retro-btn-large {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+  border: 2px outset #666;
+  padding: 8px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+}
+
+.retro-btn-large:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+.retro-btn-large:active {
+  border-style: inset;
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
+  transform: translateY(1px);
+}
+
+/* Retro button - Success (green outline) */
+.retro-btn-success {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+  border: 2px outset #666;
+  border-color: #22c55e;
+  padding: 6px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+}
+
+.retro-btn-success:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+.retro-btn-success:active {
+  border-style: inset;
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
+}
+
+/* Loading animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Chart placeholder */
+.chart-placeholder {
+  background: repeating-linear-gradient(
+    45deg,
+    #f0f0f0,
+    #f0f0f0 10px,
+    #e0e0e0 10px,
+    #e0e0e0 20px
+  );
+}
+
+/* Price change colors */
+.price-up {
+  color: #22c55e;
+}
+
+.price-down {
+  color: #ef4444;
+}
+
+/* Top bar styling */
+.top-bar {
+  background: linear-gradient(to right, #2d3748, #4a5568);
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #1a202c;
+}
+
+/* Grid layout for responsive design */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .grid-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Retro panel styling */
+.retro-panel {
+  background: white;
+  border: 2px solid #666;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+}
+
+.retro-panel-header {
+  background: linear-gradient(to right, #c0c0c0, #e0e0e0);
+  border-bottom: 2px solid #666;
+  padding: 4px 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Retro input styling */
+.retro-input {
+  background: white;
+  border: 2px inset #666;
+  padding: 4px 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.retro-input:focus {
+  outline: none;
+  border-color: #0066cc;
+} 

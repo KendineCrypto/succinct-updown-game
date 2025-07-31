@@ -19,20 +19,23 @@ export default function Bid() {
   }
 
   return (
-    <div className="bg-pink-900/20 rounded-lg p-6 shadow-lg">
+    <div className="retro-panel p-6">
+      <div className="retro-panel-header mb-4">
+        <h2 className="text-xl font-bold">Place Your Bid</h2>
+      </div>
+      
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-pink-200 mb-2">Place Your Bid</h2>
-        <div className="text-5xl font-bold text-pink-500">
+        <div className="text-5xl font-bold text-gray-700 mb-2">
           {getPhaseTimeLeft()}<span className="text-lg ml-1">s</span>
         </div>
-        <div className="mt-2 text-pink-200">
-          Your Score: <span className="font-bold text-pink-400">{score}</span>
+        <div className="text-gray-600">
+          Your Score: <span className="font-bold text-blue-600">{score}</span>
         </div>
       </div>
       
       <div className="space-y-4">
         <div className="flex flex-col space-y-2">
-          <label htmlFor="amount" className="text-pink-200 font-medium">
+          <label htmlFor="amount" className="text-gray-700 font-medium">
             Bid Amount (Score)
           </label>
           <div className="flex space-x-2">
@@ -44,7 +47,7 @@ export default function Bid() {
               min="500"
               step="100"
               placeholder="Enter amount..."
-              className="flex-1 bg-pink-950/50 border border-pink-700 rounded-lg px-4 py-2 text-white placeholder-pink-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="retro-input flex-1"
               required
             />
             <button
@@ -53,7 +56,7 @@ export default function Bid() {
                 setMinBid()
                 setLocalAmount('500')
               }}
-              className="bg-pink-600 hover:bg-pink-700 text-white font-bold px-4 py-2 rounded-lg transition-colors duration-200"
+              className="retro-btn-flat"
             >
               Min (500)
             </button>
@@ -64,14 +67,14 @@ export default function Bid() {
           <button
             type="button"
             onClick={() => handleBid('up')}
-            className="flex-1 bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="retro-btn-large flex-1"
           >
             Bid UP
           </button>
           <button
             type="button"
             onClick={() => handleBid('down')}
-            className="flex-1 bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-pink-400"
+            className="retro-btn-large flex-1"
           >
             Bid DOWN
           </button>

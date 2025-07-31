@@ -5,7 +5,7 @@ import useGameStore from '../store/useGameStore'
 function ConfettiBurst() {
   // 10 konfeti parçası, rastgele renk ve pozisyon
   const confetti = Array.from({length: 12}).map((_, i) => {
-    const colors = ['#F472B6', '#EC4899', '#F9A8D4', '#fff', '#A21CAF']
+    const colors = ['#0066cc', '#22c55e', '#3b82f6', '#fff', '#1e40af']
     const left = Math.random() * 80 + 10 // %10 - %90 arası
     const delay = Math.random() * 0.5
     const size = Math.random() * 16 + 12
@@ -56,29 +56,32 @@ export default function Result() {
   }, [result])
 
   return (
-    <div className="bg-pink-900/20 rounded-lg p-6 shadow-lg relative overflow-visible">
+    <div className="retro-panel p-6 relative overflow-visible">
       {showConfetti && <ConfettiBurst />}
+      <div className="retro-panel-header mb-4">
+        <h2 className="text-xl font-bold">Round Result</h2>
+      </div>
+      
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-pink-200 mb-2">Round Result</h2>
-        <div className="text-5xl font-bold text-pink-500">
+        <div className="text-5xl font-bold text-gray-700 mb-2">
           {getPhaseTimeLeft()}<span className="text-lg ml-1">s</span>
         </div>
       </div>
 
       <div className="space-y-4">
-        <div className="flex justify-between items-center p-4 bg-pink-950/50 rounded-lg">
-          <span className="text-pink-200">Locked Price:</span>
-          <span className="text-pink-400 font-bold">${lockedPrice?.toFixed(2)}</span>
+        <div className="flex justify-between items-center p-4 bg-gray-100 border border-gray-300">
+          <span className="text-gray-700">Locked Price:</span>
+          <span className="text-blue-600 font-bold">${lockedPrice?.toFixed(2)}</span>
         </div>
         
-        <div className="flex justify-between items-center p-4 bg-pink-950/50 rounded-lg">
-          <span className="text-pink-200">Final Price:</span>
-          <span className="text-pink-400 font-bold">${lastPrice?.toFixed(2)}</span>
+        <div className="flex justify-between items-center p-4 bg-gray-100 border border-gray-300">
+          <span className="text-gray-700">Final Price:</span>
+          <span className="text-blue-600 font-bold">${lastPrice?.toFixed(2)}</span>
         </div>
 
-        <div className="flex justify-between items-center p-4 bg-pink-950/50 rounded-lg">
-          <span className="text-pink-200">Result:</span>
-          <span className={`font-bold ${result === 'WIN' ? 'text-green-400' : 'text-red-400'}`}>
+        <div className="flex justify-between items-center p-4 bg-gray-100 border border-gray-300">
+          <span className="text-gray-700">Result:</span>
+          <span className={`font-bold ${result === 'WIN' ? 'text-green-600' : 'text-red-600'}`}>
             {result === 'WIN' ? 'WIN' : 'LOSE'}
           </span>
         </div>

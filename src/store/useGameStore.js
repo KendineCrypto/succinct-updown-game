@@ -124,13 +124,13 @@ const useGameStore = create((set, get) => ({
     if (get().phase !== PHASES.BID) return
     const { bidAmount, score } = get()
     if (bidAmount < MIN_BID || bidAmount > score) return
-    const currentPrice = get().prices[get().prices.length - 1] || 1
+    const lockedPrice = 0.009787 // Sabit locked price
     set({
       bidDirection: direction,
       phase: PHASES.WAIT,
       phaseStartTime: Date.now(),
-      lockedPrice: currentPrice,
-      prices: [currentPrice],
+      lockedPrice: lockedPrice,
+      prices: [lockedPrice],
       score: score - bidAmount
     })
   },
